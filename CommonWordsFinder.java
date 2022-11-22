@@ -17,7 +17,7 @@ import java.util.Comparator;
 
 public class CommonWordsFinder{
 
-	PQHeap heap;
+	PQHeap<MapSet.KeyValuePair<String, Integer>> heap;
 	KeyValuePairComparatorByValue<String, Integer> comparator;
 
 	public CommonWordsFinder(){
@@ -78,9 +78,19 @@ public class CommonWordsFinder{
 
 		CommonWordsFinder cwf = new CommonWordsFinder();
 
-		cwf.buildHeap("test.txt");
+		// Figure out how to write main function described in project instructions
+		for (String file: args){
 
-		System.out.println(cwf.heap);
+			cwf.buildHeap(file);
+
+
+		}
+
+		cwf.buildHeap("OUTPUTreddit_comments_2008.txt");
+
+		//System.out.println(cwf.heap);
+
+		System.out.println(cwf.heap.peek());
 
 		// for (int i = 0; i < 2; i++){
 		// 	System.out.println(cwf.heap.poll());
