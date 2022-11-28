@@ -112,6 +112,4 @@ public interface MapSet<K, V> {
      * The map will be empty after this call returns.
      */
     public void clear();
-
-    public int getCollisions();
 }

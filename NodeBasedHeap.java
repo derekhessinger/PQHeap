@@ -1,18 +1,19 @@
 /*
-* File: BSTMap.java
+* File: NodeBasedHeap.java
 * Derek Hessinger
-* CS231
-* 10/27/22
+* CS231 B
+* 11/15/22
 */
 
 import java.util.ArrayList;
 
-public class BSTMap<K extends Comparable<K>, V> implements MapSet<K, V>{
+public class NodeBasedHeap<K extends Comparable<K>, V> implements MapSet<K, V>{
 
 	private class Node{
 
 		Node left;
 		Node right;
+		Node parent;
 		KeyValuePair<K,V> kvp;
 
 		public Node(KeyValuePair<K, V> kvp){
@@ -20,6 +21,7 @@ public class BSTMap<K extends Comparable<K>, V> implements MapSet<K, V>{
 			this.kvp = kvp;
 			this.left = null;
 			this.right = null;
+			this.parent =  null;
 		}
 
 		public K getKey(){
@@ -32,22 +34,14 @@ public class BSTMap<K extends Comparable<K>, V> implements MapSet<K, V>{
 		}
 	}
 
-	// Fields for BSTMap
-	private Node root;
-	private int size;
-	int collisons = 0;
+	// Fields
+	Node root;
+	int size;
 
-
-	// Constructor for BSTMap
-	public BSTMap(){
-
+	// Constructor
+	public NodeBasedHeap(){
 		root = null;
 		size = 0;
-	}
-
-	public String getObjType(){
-
-		return "BSTMap";
 	}
 
 	// Returns value to key recursively
@@ -82,19 +76,6 @@ public class BSTMap<K extends Comparable<K>, V> implements MapSet<K, V>{
 
 			return cur.getValue();
 		}
-	}
-
-	// Returns the size of the BST
-	public int size(){
-
-		return this.size;
-	}
-
-	// Clears the BST
-	public void clear(){
-
-		this.root = null;
-		this.size = 0;
 	}
 
 	// Associates the specified value with the specified key in this map
@@ -153,6 +134,19 @@ public class BSTMap<K extends Comparable<K>, V> implements MapSet<K, V>{
 	    	cur.kvp.setValue(value);
 	    	return oldVal;
 	    }
+	}
+	
+	// Returns the size of the BST
+	public int size(){
+
+		return this.size;
+	}
+
+	// Clears the BST
+	public void clear(){
+
+		this.root = null;
+		this.size = 0;
 	}
 
 	// Returns true if the key passed is in the BST
@@ -266,31 +260,4 @@ public class BSTMap<K extends Comparable<K>, V> implements MapSet<K, V>{
 		}
 		return str;
 	}
-	public static void main(String[] args){
-
-		BSTMap<String, Integer> map = new BSTMap<String, Integer>();
-
-		map.put("one", 1);
-		map.put("two", 2);
-		map.put("three", 3);
-
-		// Tests for BSTMap
-		System.out.println(map.getObjType());
-		System.out.println(map.get("one"));
-		System.out.println(map.size());
-		map.clear();
-		System.out.println(map);
-		map.put("one", 1);
-		map.put("two", 2);
-		map.put("three", 3);
-		System.out.println(map.containsKey("one"));
-		System.out.println(map.keySet());
-		System.out.println(map.values());
-		System.out.println(map.entrySet());
-	}
 }
-
-
-
-
-

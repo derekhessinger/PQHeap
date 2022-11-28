@@ -286,6 +286,7 @@ public class HashMap<K, V> implements MapSet<K, V> {
         
         hm.remove(8);
         hm.remove(9);
+        hm.get(5);
 
         System.out.println(hm);
     }

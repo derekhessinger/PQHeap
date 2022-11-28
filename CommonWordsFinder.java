@@ -14,11 +14,13 @@ import java.util.Scanner;
 import java.io.File; 
 import java.io.FileWriter;
 import java.util.Comparator;
+import java.util.Arrays;
 
 public class CommonWordsFinder{
 
 	PQHeap<MapSet.KeyValuePair<String, Integer>> heap;
 	KeyValuePairComparatorByValue<String, Integer> comparator;
+	int size;
 
 	public CommonWordsFinder(){
 
@@ -27,6 +29,17 @@ public class CommonWordsFinder{
 		//Create heap object
 		// Figure out why this is causing an error
 		this.heap = new PQHeap<MapSet.KeyValuePair<String, Integer>>(comparator);
+		this.size = 0;
+	}
+
+	public void clear(){
+		this.comparator = new KeyValuePairComparatorByValue<String, Integer>();
+
+		//Create heap object
+		// Figure out why this is causing an error
+		this.heap = new PQHeap<MapSet.KeyValuePair<String, Integer>>(comparator);
+		this.size = 0;
+
 	}
 
 	// Reads word counter file and builds heap
@@ -42,6 +55,11 @@ public class CommonWordsFinder{
 
 			// Read the first line
 			String line = br.readLine();
+
+			// Split the first line to grab the total number of words in the reddit file
+			String[] firstLine = line.split("[^a-zA-Z0-9']");
+
+			this.size = Integer.parseInt(firstLine[2]);
 
 			// Read again so the header is not included in the heap
 			line = br.readLine();
@@ -78,19 +96,23 @@ public class CommonWordsFinder{
 
 		CommonWordsFinder cwf = new CommonWordsFinder();
 
-		// Figure out how to write main function described in project instructions
-		for (String file: args){
+		int num = Integer.parseInt(args[0]);
 
-			cwf.buildHeap(file);
+		for (int i = 1; i < args.length; i++){
 
+			cwf.buildHeap(args[i]);
+			System.out.println("TEN MOST FREQUENT WORDS FOR: " + args[i]);
+			for (int j = 0; j < num; j++){
 
+				MapSet.KeyValuePair<String, Integer> word = cwf.heap.poll();
+				int count = word.getValue();
+				double freq = ((double)count) / cwf.size;
+				System.out.println("Word Count: " +  word + ", frequency: " + freq + ", size: " + cwf.size);
+			}
+			System.out.println("\n");
+			cwf.clear();
+			//cwf.heap.clear();
 		}
-
-		cwf.buildHeap("OUTPUTreddit_comments_2008.txt");
-
-		//System.out.println(cwf.heap);
-
-		System.out.println(cwf.heap.peek());
 
 		// for (int i = 0; i < 2; i++){
 		// 	System.out.println(cwf.heap.poll());
