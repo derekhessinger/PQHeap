@@ -16,45 +16,29 @@ import java.io.FileWriter;
 
 public class WordTrendsFinder{
 
+	// Takes in file as first argument, first year as second, last year as third, 
+	// and words to be searched as following arguments
+	// Returns file, word, total number of occurences, and frequency
 	public static void main(String[] args){
 
 		String filename = args[0];
 
-		// int minNum = Integer.parseInt(args[1]);
-		// int maxNum = Integer.parseInt(args[2]);
+		int minNum = Integer.parseInt(args[1]);
+		int maxNum = Integer.parseInt(args[2]);
 
-		// System.out.println("file, word, count, frequency");
-		// for (int i = minNum; i < maxNum+1; i++){
+		System.out.println("file, word, count, frequency");
+			for (int i = minNum; i < maxNum+1; i++){
 
-		// 	WordCounter wc = new WordCounter("hashmap");
+			WordCounter wc = new WordCounter("hashmap");
 
-		// 	ArrayList<String> words = wc.readWords(filename + i + ".txt");
+			ArrayList<String> words = wc.readWords(filename + i + ".txt");
 
-		// 	//System.out.println(words);
+			wc.buildMap(words);
 
-		// 	wc.buildMap(words);
+			for (int j = 3; j < args.length; j++){
 
-		// 	for (int j = 3; j < args.length; j++){
-
-		// 		//System.out.println(wc.totalWordCount());
-		// 		System.out.println(filename + i + "," + args[j] + "," + wc.getCount(args[j]) + "," + wc.getFrequency(args[j]));
-		// 	}
-
-		// 	// wc.clearMap();
-		// }
-
-		WordCounter wc = new WordCounter("hashmap");
-
-		ArrayList<String> words = wc.readWords(filename + ".txt");
-
-		//System.out.println(words);
-
-		wc.buildMap(words);
-
-		for (int j = 1; j < args.length; j++){
-
-			//System.out.println(wc.totalWordCount());
-			System.out.println(filename + "," + args[j] + "," + wc.getCount(args[j]) + "," + wc.getFrequency(args[j]));
+				System.out.println(filename + i + "," + args[j] + "," + wc.getCount(args[j]) + "," + wc.getFrequency(args[j]));
+			}
 		}
 	}
 }

@@ -115,6 +115,7 @@ public class BSTMap<K extends Comparable<K>, V> implements MapSet<K, V>{
 	// Puts a value at key k passed
 	private V put(K key, V value, Node cur) {
 
+		// If key is less than cur
 	    if (key.compareTo(cur.getKey()) < 0){
 
 	        if (cur.left != null){
@@ -129,7 +130,9 @@ public class BSTMap<K extends Comparable<K>, V> implements MapSet<K, V>{
 	            size++;
 	            return null;
 	        }
-	    } 
+	    }
+
+	    //  If key is greater than cur
 	    else if (key.compareTo(cur.getKey()) > 0){
 
 	        if (cur.right != null){

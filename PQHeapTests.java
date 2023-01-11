@@ -70,6 +70,9 @@ public class PQHeapTests{
 			// verify
 			System.out.println(deleted + " == 10");
 			System.out.println(heap);
+
+			// test
+			assert deleted == 10 : "Error in PQHeap::poll()";
 		}
 	}
 }

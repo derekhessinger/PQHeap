@@ -17,6 +17,7 @@ public class HashMap<K, V> implements MapSet<K, V> {
     double loadFactor;
     int collisions;
 
+    // Constructor
     public HashMap(){
 
         this.map = new LinkedList[1000];
@@ -24,23 +25,26 @@ public class HashMap<K, V> implements MapSet<K, V> {
         this.loadFactor = 0.75;
     }
 
+    // Constructor
     public HashMap(int initialCapacity) {
         this.map = new LinkedList[initialCapacity];
         this.size = 0;
         this.loadFactor = 0.75;
     }
 
+    // Constuctor
     public HashMap(int initialCapacity, double loadFactor) {
         this.map = new LinkedList[initialCapacity];
         this.size = 0;
         this.loadFactor = loadFactor;
     }
 
+    // Returns size
     public int size(){
         return this.size;
     }
 
-    // Check if this.map should be set to null
+    // Clears map
     public void clear(){
         this.map = (LinkedList<KeyValuePair<K, V>>[]) new LinkedList[(capacity())];
         this.size = 0;
@@ -53,7 +57,6 @@ public class HashMap<K, V> implements MapSet<K, V> {
 
     // this method returns the index that will be used by any given key for this
     // mapping
-    //**ASK ABOUT A DIFFERENT HASH FUNCTION**
     private int hash(K key) {
         return Math.abs(key.hashCode() % capacity()); // this returns a value between 0 and capacity() - 1, inclusive
     }
@@ -114,6 +117,7 @@ public class HashMap<K, V> implements MapSet<K, V> {
         }
     }
 
+    // Returns number of collisions
     public int getCollisions(){
 
         return this.collisions;
@@ -189,6 +193,7 @@ public class HashMap<K, V> implements MapSet<K, V> {
         return null; 
     }
 
+    // Returns arraylist of all keys
     public ArrayList<K> keySet(){
 
         ArrayList<K> keys = new ArrayList<K>();
@@ -209,6 +214,7 @@ public class HashMap<K, V> implements MapSet<K, V> {
         return keys;
     }
 
+    // Returns arraylist of all values
     public ArrayList<V> values(){
 
         ArrayList<V> vals = new ArrayList<V>();
@@ -229,6 +235,7 @@ public class HashMap<K, V> implements MapSet<K, V> {
         return vals;
     }
 
+    // Returns arraylist of all kvps
     public ArrayList<KeyValuePair<K, V>> entrySet(){
 
         ArrayList<KeyValuePair<K, V>> set = new ArrayList<KeyValuePair<K, V>>();
@@ -290,40 +297,4 @@ public class HashMap<K, V> implements MapSet<K, V> {
 
         System.out.println(hm);
     }
-
-    // @Override
-    // public boolean containsKey(K key) {
-    //     // TODO Auto-generated method stub
-    //     return false;
-    // }
-
-    // @Override
-    // public ArrayList<K> keySet() {
-    //     // TODO Auto-generated method stub
-    //     return null;
-    // }
-
-    // @Override
-    // public ArrayList<V> values() {
-    //     // TODO Auto-generated method stub
-    //     return null;
-    // }
-
-    // @Override
-    // public ArrayList<MapSet.KeyValuePair<K, V>> entrySet() {
-    //     // TODO Auto-generated method stub
-    //     return null;
-    // }
-
-    // @Override
-    // public int size() {
-    //     // TODO Auto-generated method stub
-    //     return 0;
-    // }
-
-    // @Override
-    // public void clear() {
-    //     // TODO Auto-generated method stub
-
-    // }
 }

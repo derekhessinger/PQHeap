@@ -153,12 +153,6 @@ public class WordCounter{
   		return freq;
   	}
 
-  	// // Returns the number of collisions (HashMap only)
-  	// public int getCollisions(){
-
-  	// 	return ds.getCollisions();
-  	// }
-
   	public static void main(String[] args){
 
   		WordCounter wc = new WordCounter("hashmap");
